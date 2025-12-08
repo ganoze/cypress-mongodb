@@ -5,11 +5,10 @@ import * as delete_util from './utils/delete';
 import * as find_util from './utils/find';
 import * as update_util from './utils/update';
 import * as command_util from './utils/command';
-
-const webpackPreprocessor = require('@cypress/webpack-batteries-included-preprocessor');
+import * as webpack_preprocessor from '@cypress/webpack-batteries-included-preprocessor';
 
 function getWebpackOptions() {
-  const options = webpackPreprocessor.getFullWebpackOptions();
+  const options = webpack_preprocessor.getFullWebpackOptions();
   options.resolve.fallback.crypto = require.resolve('crypto-browserify');
   options.resolve.fallback.util = require.resolve('util');
   options.resolve.fallback.zlib = require.resolve('browserify-zlib');
@@ -19,7 +18,7 @@ function getWebpackOptions() {
 export function configurePlugin(on: Cypress.PluginEvents) {
   on(
     'file:preprocessor',
-    webpackPreprocessor({
+    webpack_preprocessor({
       typescript: 'typescript',
       webpackOptions: getWebpackOptions(),
     }),
