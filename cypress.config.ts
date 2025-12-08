@@ -4,8 +4,9 @@ import { configurePlugin } from './dist';
 export default defineConfig({
   video: false,
   e2e: {
-    setupNodeEvents(on: any) {
+    setupNodeEvents(on, config) {
       configurePlugin(on);
+      return config;
     },
   },
 });
